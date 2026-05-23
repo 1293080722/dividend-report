@@ -6,29 +6,26 @@ on:
     - cron: "30 1 * * 1,3"
   workflow_dispatch:  # 支持手动触发
 
-# 全局权限
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# 防止并发部署
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+# 全局最小权限，各 Job 自行声明所需权限
+permissions: {}
 
 jobs:
   # ===== Job 1：生成报告 =====
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # 此 Job 需要写代码（git push）
+    permissions:
+      contents: write
     outputs:
       report-ready: ${{ steps.gen.outcome }}
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 需要完整历史才能 push
 
-      - name: 设置Python
+      - name: 设置 Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -68,10 +65,14 @@ jobs:
     if: success()
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    # 此 Job 只需要 Pages 部署权限
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: 部署到 Pages
+      - name: 部署到 GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
