@@ -3,12 +3,11 @@
 """
 红利组合综合估值报告 - 完整版
 生成6章节完整分析报告，邮件发送
-数据源：akshare（优先）+ 新浪财经（备选）
+数据源：腾讯财经(qt.gtimg.cn) — 不需要akshare依赖
 """
 
 import os
 import sys
-import time
 import smtplib
 from datetime import datetime
 from email.mime.text import MIMEText
@@ -166,102 +165,109 @@ SMTP_PASS   = os.environ.get("DIV_SMTP_PASS", "")
 SMTP_SERVER = "smtp.qq.com"
 SMTP_PORT   = 465
 
-BUILD_RATIO = 0.90   # 建仓价 = 当前价 × 90%
-ADD_RATIO   = 0.80   # 加仓位 = 当前价 × 80%
+# 目标股息率（%），基于BUILD_LOGIC手动推导
+# (建仓目标股息率, 加仓目标股息率)
+TARGET_YIELD = {
+    "600036": (8.41, 9.47), "601398": (4.70, 5.26),
+    "601939": (4.42, 4.96), "601658": (5.75, 6.45),
+    "601988": (4.67, 5.16), "601318": (5.40, 6.00),
+    "600941": (2.50, 2.82), "600887": (6.00, 6.73),
+    "600690": (6.08, 6.80), "601888": (1.46, 1.67),
+    "600900": (3.29, 3.59), "002096": (2.69, 3.01),
+    "002027": (6.54, 7.39),
+    "561580": (10.87, 11.90), "513530": (8.00, 8.70),
+}
 
 # ============================================================
 # 数据获取
 # ============================================================
 
-def get_stock_price_ak(code):
-    """akshare获取个股行情"""
-    try:
-        import akshare as ak
-        df = ak.stock_zh_a_spot_em()
-        row = df[df["代码"] == code]
-        if row.empty:
-            return None
-        r = row.iloc[0]
-        return {
-            "price": float(r["最新价"]),
-            "pe":    float(r["市盈率-动态"]) if r["市盈率-动态"] != "-" else None,
-            "pb":    float(r["市净率"])     if r["市净率"]   != "-" else None,
-            "chg":   float(r["涨跌幅"])     if r["涨跌幅"]   != "-" else 0,
-        }
-    except Exception as e:
-        print("[ak] {} 失败: {}".format(code, e))
-        return None
-
-
-def get_etf_price_ak(code):
-    """akshare获取ETF行情"""
-    try:
-        import akshare as ak
-        df = ak.fund_etf_spot_em()
-        row = df[df["代码"] == code]
-        if row.empty:
-            return None
-        r = row.iloc[0]
-        return {
-            "price": float(r["最新价"]),
-            "chg":   float(r["涨跌幅"]) if r["涨跌幅"] != "-" else 0,
-        }
-    except Exception as e:
-        print("[ak] ETF {} 失败: {}".format(code, e))
-        return None
-
-
-def get_stock_price_sina(code):
-    """新浪财经备选源"""
+def get_all_tencent():
+    """腾讯财经API批量获取行情（替代akshare，稳定、不依赖东方财富服务器）"""
     try:
         import requests
-        market = "sh" if code.startswith("6") else "sz"
-        url = "https://hq.sinajs.cn/list={}{}".format(market, code)
-        resp = requests.get(url, headers={"Referer": "https://finance.sina.com.cn"}, timeout=10)
+        import re
+        # 拼装股票代码（上海:sh, 深圳:sz）+ ETF（上海:sh）
+        stock_codes = []
+        for s in STOCKS:
+            prefix = "sh" if s["code"].startswith("6") else "sz"
+            stock_codes.append(prefix + s["code"])
+        for e in ETFS:
+            stock_codes.append("sh" + e["code"])
+        url = "https://qt.gtimg.cn/q=" + ",".join(stock_codes)
+        resp = requests.get(url, timeout=15)
         resp.encoding = "gbk"
-        data = resp.text.split('"')[1].split(",")
-        if len(data) < 30:
-            return None
-        return {
-            "price": float(data[3]),
-            "pe": None, "pb": None,
-            "chg": (float(data[3]) / float(data[2]) - 1) * 100 if float(data[2]) > 0 else 0,
-        }
+        lines = resp.text.strip().split("\n")
+        result = {}
+        for line in lines:
+            m = re.search(r'v_\w+="([^"]+)"', line)
+            if not m:
+                continue
+            fields = m.group(1).split("~")
+            if len(fields) < 10:
+                continue
+            code = fields[2]
+            try:
+                price = float(fields[3])
+            except (ValueError, IndexError):
+                continue
+            # PE在fields[39]（腾讯API固定位置），PB在fields[46]附近（位置可能有偏移）
+            pe_val = None
+            pb_val = None
+            try:
+                if len(fields) > 39 and fields[39]:
+                    pe_val = float(fields[39])
+            except (ValueError, IndexError):
+                pass
+            try:
+                if len(fields) > 46 and fields[46]:
+                    pb_val = float(fields[46])
+            except (ValueError, IndexError):
+                pass
+            result[code] = {
+                "price": price,
+                "pe": pe_val,
+                "pb": pb_val,
+                "chg": float(fields[32]) if len(fields) > 32 and fields[32] else 0,
+            }
+        return result
+    except ImportError:
+        print("[tencent] requests 库不可用")
+        return None
     except Exception as e:
-        print("[sina] {} 失败: {}".format(code, e))
+        print("[tencent] 失败: {}".format(e))
         return None
 
 
 def fetch_all():
     """获取所有标的实时数据，返回 (stock_results, etf_results, sources)"""
-    try:
-        import akshare as ak
-        use_ak = True
-        sources = ["akshare(东方财富)"]
-    except ImportError:
-        use_ak = False
-        sources = []
+    data = get_all_tencent()
+    if data:
+        sources = ["腾讯财经(qt.gtimg.cn)"]
+    else:
+        data = {}
+        sources = ["预设数据（网络不可用）"]
 
     stock_results = []
     for s in STOCKS:
         code = s["code"]
         r = {"code": code, "name": s["name"], "type_name": s["type_name"]}
-        d = None
-        if use_ak:
-            d = get_stock_price_ak(code)
-        if not d:
-            d = get_stock_price_sina(code)
-            if d and "新浪财经" not in sources:
-                sources.append("新浪财经")
-        if d and d.get("price"):
-            r["price"] = d["price"]
+        d = data.get(code, {})
+        price = d.get("price")
+        if price:
+            r["price"] = price
             r["pe"]    = d.get("pe")
             r["pb"]    = d.get("pb")
             r["chg"]   = d.get("chg", 0)
             r["div"]   = PRESET_DIV.get(code, 0)
-            r["yield"] = round(r["div"] / r["price"] * 100, 2) if r["price"] else None
-            r["build"] = round(r["price"] * BUILD_RATIO, 2)
-            r["add"]   = round(r["price"] * ADD_RATIO, 2)
+            r["yield"] = round(r["div"] / r["price"] * 100, 2)
+            # 用TARGET_YIELD目标股息率推导建仓价/加仓位
+            ty = TARGET_YIELD.get(code)
+            if ty:
+                r["build"] = round(r["div"] / (ty[0] / 100), 2)
+                r["add"]   = round(r["div"] / (ty[1] / 100), 2)
+            else:
+                r["build"] = r["add"] = None
             if r["build"] and r["price"]:
                 r["space"] = round((r["build"] - r["price"]) / r["price"] * 100, 1)
             else:
@@ -270,22 +276,24 @@ def fetch_all():
             r["price"] = r["pe"] = r["pb"] = r["chg"] = r["div"] = r["yield"] = r["build"] = r["add"] = None
             r["space"] = None
         stock_results.append(r)
-        time.sleep(0.3)
 
     etf_results = []
     for e in ETFS:
         code = e["code"]
         r = {"code": code, "name": e["name"], "type_name": e["type_name"]}
-        d = None
-        if use_ak:
-            d = get_etf_price_ak(code)
-        if d and d.get("price"):
-            r["price"] = d["price"]
+        d = data.get(code, {})
+        price = d.get("price")
+        if price:
+            r["price"] = price
             r["chg"]   = d.get("chg", 0)
             r["div"]   = PRESET_DIV.get(code, 0)
-            r["yield"] = round(r["div"] / r["price"] * 100, 2) if r["price"] else None
-            r["build"] = round(r["price"] * BUILD_RATIO, 3)
-            r["add"]   = round(r["price"] * ADD_RATIO, 3)
+            r["yield"] = round(r["div"] / r["price"] * 100, 2)
+            ty = TARGET_YIELD.get(code)
+            if ty:
+                r["build"] = round(r["div"] / (ty[0] / 100), 3)
+                r["add"]   = round(r["div"] / (ty[1] / 100), 3)
+            else:
+                r["build"] = r["add"] = None
             if r["build"] and r["price"]:
                 r["space"] = round((r["build"] - r["price"]) / r["price"] * 100, 1)
             else:
@@ -294,7 +302,6 @@ def fetch_all():
             r["price"] = r["chg"] = r["div"] = r["yield"] = r["build"] = r["add"] = None
             r["space"] = None
         etf_results.append(r)
-        time.sleep(0.3)
 
     return stock_results, etf_results, sources
 
