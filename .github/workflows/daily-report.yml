@@ -6,6 +6,12 @@ on:
     - cron: "30 1 * * 1,3"
   workflow_dispatch:  # 支持手动触发
 
+# 赋予 Pages 部署权限
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   generate-report:
     runs-on: ubuntu-latest
@@ -25,18 +31,47 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 生成并发送报告
+      - name: 生成报告
         env:
+          # 邮件功能可选：不配置 Secrets 则跳过邮件发送
           DIV_EMAIL_FROM: ${{ secrets.DIV_EMAIL_FROM }}
           DIV_EMAIL_TO: ${{ secrets.DIV_EMAIL_TO }}
           DIV_SMTP_PASS: ${{ secrets.DIV_SMTP_PASS }}
         run: python report_generator.py
 
-      - name: 提交报告到仓库（可选）
+      - name: 提交报告到仓库
         if: success()
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add 红利组合综合估值报告_*.html report_summary.json 红利组合综合估值报告_latest.html
+          git add "红利组合综合估值报告_*.html" report_summary.json 2>/dev/null || true
+          git add "红利组合综合估值报告_latest.html" 2>/dev/null || true
           git diff --staged --quiet || git commit -m "📊 自动更新日报 $(date +'%Y-%m-%d')"
           git push
+
+      # -------- GitHub Pages 部署 --------
+      - name: 准备 Pages  artifacts
+        if: success()
+        run: |
+          # 将最新报告复制为 index.html（GitHub Pages 入口）
+          if [ -f "红利组合综合估值报告_latest.html" ]; then
+            cp "红利组合综合估值报告_latest.html" index.html
+          else
+            # 找最新的报告文件
+            LATEST=$(ls 红利组合综合估值报告_*.html 2>/dev/null | sort -r | head -1)
+            if [ -n "$LATEST" ]; then
+              cp "$LATEST" index.html
+            fi
+          fi
+          # 列出将要部署的文件
+          echo "Pages artifacts:"; ls -la *.html report_summary.json 2>/dev/null || true
+
+      - name: 上传 Pages artifact
+        if: success()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."  # 当前目录所有文件
+
+      - name: 部署到 GitHub Pages
+        if: success()
+        uses: actions/deploy-pages@v4
