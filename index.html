@@ -3,19 +3,675 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>红利组合日报</title>
+<title>红利组合综合估值报告 | 2026-05-23</title>
 <style>
-  body { background:#0d1117; color:#c9d1d9; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; padding:40px; text-align:center; }
-  h1 { color:#58a6ff; }
-  p { color:#8b949e; font-size:16px; }
-  a { color:#58a6ff; text-decoration:none; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.8;
+    padding: 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+  }
+  h2 {
+    font-size: 20px;
+    margin: 35px 0 15px 0;
+    padding-left: 12px;
+    border-left: 4px solid #333;
+  }
+  .info-box {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 13px;
+    line-height: 2;
+    border-radius: 4px;
+  }
+  .info-box strong { display: inline-block; min-width: 6em; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  th {
+    background: #333;
+    color: #fff;
+    padding: 12px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  td {
+    padding: 10px 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  tr:nth-child(even) { background: #fafafa; }
+  tr:hover { background: #f0f0f0; }
+  .price { font-weight: 700; font-size: 15px; }
+  .yield-high { color: #c0392b; font-weight: 700; }
+  .yield-mid { color: #d35400; font-weight: 600; }
+  .yield-low { color: #555; }
+  .tag-bank { background: #2c3e50; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+  .tag-consumer { background: #8e44ad; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+  .tag-power { background: #2980b9; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+  .tag-insurance { background: #d35400; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+  .tag-media { background: #16a085; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+  .tag-industry { background: #7f8c8d; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+  .tag-etf { background: #c0392b; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+  .tag-telecom { background: #e67e22; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #333;
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    line-height: 2;
+  }
+  .section-note {
+    font-size: 13px;
+    color: #666;
+    margin: 8px 0 16px 0;
+    line-height: 1.6;
+  }
+  .highlight-row { background: #fffde7 !important; }
+  .summary-card {
+    display: inline-block;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 12px 24px;
+    margin: 10px 8px;
+    border-radius: 4px;
+    text-align: center;
+    min-width: 140px;
+  }
+  .summary-card .num { font-size: 24px; font-weight: 700; }
+  .summary-card .label { font-size: 12px; color: #888; margin-top: 4px; }
+  .basis-col { font-size: 12px; text-align: left; max-width: 180px; }
+  @media print {
+    body { padding: 20px; }
+    table { font-size: 12px; }
+    th, td { padding: 6px; }
+  }
 </style>
 </head>
 <body>
-<h1>📅 红利组合日报</h1>
-<p>GitHub Pages 部署成功！</p>
-<p>完整报告正在通过 GitHub Actions 自动生成中...</p>
-<br>
-<p><a href="https://github.com/1293080722/dividend-report" target="_blank">查看仓库 →</a></p>
+
+<h1>红利组合综合估值报告</h1>
+<div class="subtitle">
+  数据日期：2026年5月22日（周五收盘）&nbsp;|&nbsp; 报告生成：2026年5月23日 &nbsp;|&nbsp; 方法论：邱国鹭"三好原则"价值投资框架
+</div>
+
+<!-- 概览卡片 -->
+<div style="text-align:center; margin:25px 0;">
+  <div class="summary-card">
+    <div class="num" style="color:#333;">15</div>
+    <div class="label">覆盖标的</div>
+  </div>
+  <div class="summary-card">
+    <div class="num" style="color:#c0392b;">8.18%</div>
+    <div class="label">最高个股股息率（招商银行）</div>
+  </div>
+  <div class="summary-card">
+    <div class="num" style="color:#c0392b;">10.25%</div>
+    <div class="label">最高股息率（央企红利ETF）</div>
+  </div>
+  <div class="summary-card">
+    <div class="num" style="color:#333;">4.77%</div>
+    <div class="label">组合平均股息率</div>
+  </div>
+</div>
+
+<h2>一、综合估值总表</h2>
+<div class="section-note">
+  ⚐ 以下表格按用户要求格式输出：今日股价 / 对应股息率 / 推荐建仓价 / 推荐加仓位 / 判断依据。<br>
+  ⚐ 股息率为TTM口径（近12个月累计分红 ÷ 当前股价），分红数据统一以同花顺(10jqka.com.cn)为口径标准。<br>
+  ⚐ 建仓价定义为"估值合理、股息率具有吸引力"的买入区间上沿；加仓位定义为"估值显著低估、股息率极具吸引力"的价位。<br>
+  ⚐ 数据来源：同花顺（主口径）/ 中财网 / 东方财富 / 雪球，多源交叉验证。
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>标的名称</th>
+  <th>代码</th>
+  <th>行业</th>
+  <th>今日收盘价</th>
+  <th>PE(TTM)</th>
+  <th>全年每股分红</th>
+  <th>股息率(TTM)</th>
+  <th>推荐建仓价</th>
+  <th>推荐加仓位</th>
+  <th>距建仓空间</th>
+  <th>判断依据</th>
+</tr>
+</thead>
+<tbody>
+
+<!-- 银行股 -->
+<tr class="highlight-row">
+  <td>1</td>
+  <td style="text-align:left;font-weight:600;">招商银行</td>
+  <td>600036</td>
+  <td><span class="tag-bank">银行</span></td>
+  <td class="price">¥37.02</td>
+  <td>6.19</td>
+  <td>¥3.0290</td>
+  <td class="yield-high">8.18%</td>
+  <td class="price">¥36.00</td>
+  <td class="price">¥32.00</td>
+  <td style="color:#27ae60;">-2.8%</td>
+  <td class="basis-col">同花顺：2025中期10派10.13+末期10派20.16元</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td style="text-align:left;font-weight:600;">工商银行</td>
+  <td>601398</td>
+  <td><span class="tag-bank">银行</span></td>
+  <td class="price">¥7.18</td>
+  <td>6.89</td>
+  <td>¥0.3103</td>
+  <td class="yield-mid">4.32%</td>
+  <td class="price">¥6.60</td>
+  <td class="price">¥5.90</td>
+  <td style="color:#c0392b;">-8.1%</td>
+  <td class="basis-col">同花顺：2025中期10派1.414+末期10派1.689元</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td style="text-align:left;font-weight:600;">建设银行</td>
+  <td>601939</td>
+  <td><span class="tag-bank">银行</span></td>
+  <td class="price">¥10.10</td>
+  <td>7.73</td>
+  <td>¥0.3887</td>
+  <td class="yield-mid">3.85%</td>
+  <td class="price">¥9.30</td>
+  <td class="price">¥8.10</td>
+  <td style="color:#c0392b;">-7.9%</td>
+  <td class="basis-col">同花顺：2025中报10派1.858+年报10派2.029元</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td style="text-align:left;font-weight:600;">邮储银行</td>
+  <td>601658</td>
+  <td><span class="tag-bank">银行</span></td>
+  <td class="price">¥4.94</td>
+  <td>6.75</td>
+  <td>¥0.2183</td>
+  <td class="yield-mid">4.42%</td>
+  <td class="price">¥4.60</td>
+  <td class="price">¥4.00</td>
+  <td style="color:#c0392b;">-6.9%</td>
+  <td class="basis-col">同花顺：2025中报10派1.23+年报10派0.953元</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td style="text-align:left;font-weight:600;">中国银行</td>
+  <td>601988</td>
+  <td><span class="tag-bank">银行</span></td>
+  <td class="price">¥5.86</td>
+  <td>7.70</td>
+  <td>¥0.2263</td>
+  <td class="yield-mid">3.86%</td>
+  <td class="price">¥5.40</td>
+  <td class="price">¥4.70</td>
+  <td style="color:#c0392b;">-7.8%</td>
+  <td class="basis-col">同花顺：2025中报10派1.094+年报10派1.169元</td>
+</tr>
+
+<!-- 保险 -->
+<tr>
+  <td>6</td>
+  <td style="text-align:left;font-weight:600;">中国平安</td>
+  <td>601318</td>
+  <td><span class="tag-insurance">保险</span></td>
+  <td class="price">¥53.68</td>
+  <td>7.32</td>
+  <td>¥2.7000</td>
+  <td class="yield-high">5.03%</td>
+  <td class="price">¥50.00</td>
+  <td class="price">¥45.00</td>
+  <td style="color:#c0392b;">-6.9%</td>
+  <td class="basis-col">同花顺：2025中报10派9.5+末期10派17.5元</td>
+</tr>
+
+<!-- 电信 -->
+<tr class="highlight-row">
+  <td>7</td>
+  <td style="text-align:left;font-weight:600;">中国移动</td>
+  <td>600941</td>
+  <td><span class="tag-telecom">电信</span></td>
+  <td class="price">¥96.75</td>
+  <td>15.31</td>
+  <td>¥4.7037</td>
+  <td class="yield-mid">4.86%</td>
+  <td class="price">¥94.00</td>
+  <td class="price">¥86.00</td>
+  <td style="color:#27ae60;">-2.8%</td>
+  <td class="basis-col">同花顺：2025中报10派25.025+年报10派22.012元</td>
+</tr>
+
+<!-- 消费 -->
+<tr>
+  <td>8</td>
+  <td style="text-align:left;font-weight:600;">伊利股份</td>
+  <td>600887</td>
+  <td><span class="tag-consumer">消费</span></td>
+  <td class="price">¥26.20</td>
+  <td>13.71</td>
+  <td>¥1.3800</td>
+  <td class="yield-high">5.27%</td>
+  <td class="price">¥23.00</td>
+  <td class="price">¥21.00</td>
+  <td style="color:#c0392b;">-12.2%</td>
+  <td class="basis-col">同花顺：2025三季报10派4.8+年报10派9.0元</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td style="text-align:left;font-weight:600;">海尔智家</td>
+  <td>600690</td>
+  <td><span class="tag-consumer">消费</span></td>
+  <td class="price">¥20.38</td>
+  <td>10.21</td>
+  <td>¥1.1557</td>
+  <td class="yield-high">5.67%</td>
+  <td class="price">¥19.00</td>
+  <td class="price">¥17.00</td>
+  <td style="color:#c0392b;">-6.8%</td>
+  <td class="basis-col">同花顺：2025中期10派2.69+末期10派8.867元</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td style="text-align:left;font-weight:600;">中国中免</td>
+  <td>601888</td>
+  <td><span class="tag-consumer">消费</span></td>
+  <td class="price">¥56.65</td>
+  <td>29.45</td>
+  <td>¥0.7020</td>
+  <td class="yield-low">1.24%</td>
+  <td class="price">¥47.00</td>
+  <td class="price">¥41.00</td>
+  <td style="color:#c0392b;">-17.0%</td>
+  <td class="basis-col">同花顺：2025中期约10派2.5+末期10派4.5元</td>
+</tr>
+
+<!-- 电力 -->
+<tr class="highlight-row">
+  <td>11</td>
+  <td style="text-align:left;font-weight:600;">长江电力</td>
+  <td>600900</td>
+  <td><span class="tag-power">电力</span></td>
+  <td class="price">¥26.56</td>
+  <td>18.01</td>
+  <td>¥1.0000</td>
+  <td class="yield-mid">3.77%</td>
+  <td class="price">¥24.00</td>
+  <td class="price">¥21.00</td>
+  <td style="color:#c0392b;">-9.6%</td>
+  <td class="basis-col">同花顺：2025中报10派2.1+年报10派7.9元</td>
+</tr>
+
+<!-- 工业/传媒 -->
+<tr>
+  <td>12</td>
+  <td style="text-align:left;font-weight:600;">易普力</td>
+  <td>002096</td>
+  <td><span class="tag-industry">化工</span></td>
+  <td class="price">¥10.39</td>
+  <td>17.54</td>
+  <td>¥0.2560</td>
+  <td class="yield-low">2.46%</td>
+  <td class="price">¥9.50</td>
+  <td class="price">¥8.50</td>
+  <td style="color:#c0392b;">-8.6%</td>
+  <td class="basis-col">同花顺：2025年报10派2.56元</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td style="text-align:left;font-weight:600;">分众传媒</td>
+  <td>002027</td>
+  <td><span class="tag-media">传媒</span></td>
+  <td class="price">¥5.51</td>
+  <td>22.10</td>
+  <td>¥0.3400</td>
+  <td class="yield-high">6.17%</td>
+  <td class="price">¥5.20</td>
+  <td class="price">¥4.60</td>
+  <td style="color:#27ae60;">-5.6%</td>
+  <td class="basis-col">同花顺：2025三次分红合计约10派3.4元</td>
+</tr>
+
+<!-- ETF -->
+<tr class="highlight-row">
+  <td>14</td>
+  <td style="text-align:left;font-weight:600;">央企红利ETF</td>
+  <td>561580</td>
+  <td><span class="tag-etf">ETF</span></td>
+  <td class="price">¥1.220</td>
+  <td>—</td>
+  <td>¥0.1250</td>
+  <td class="yield-high" style="font-size:16px;">10.25%</td>
+  <td class="price">¥1.150</td>
+  <td class="price">¥1.050</td>
+  <td style="color:#27ae60;">-5.7%</td>
+  <td class="basis-col">同花顺：近12个月累计单位分红（月频）</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td style="text-align:left;font-weight:600;">港股通红利ETF</td>
+  <td>513530</td>
+  <td><span class="tag-etf">ETF</span></td>
+  <td class="price">¥1.633</td>
+  <td>—</td>
+  <td>¥0.1200</td>
+  <td class="yield-high">7.35%</td>
+  <td class="price">¥1.500</td>
+  <td class="price">¥1.380</td>
+  <td style="color:#c0392b;">-8.1%</td>
+  <td class="basis-col">同花顺：近12个月累计单位分红（季频）</td>
+</tr>
+
+</tbody>
+</table>
+
+<h2>二、分项估值逻辑</h2>
+<div class="section-note">以下详述每只标的的估值依据、股息计算方式、建仓价与加仓位的推导逻辑。</div>
+
+<!-- 银行板块 -->
+<h3 style="margin-top:25px; color:#555;">▎银行板块（5只）</h3>
+
+<table>
+<thead>
+<tr><th style="width:12%;">标的</th><th>估值逻辑</th><th style="width:18%;">建仓价推导</th><th style="width:18%;">加仓位推导</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td style="font-weight:600;">招商银行</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：2025全年分红3.029元/股（中期10派10.13+末期10派20.16），分红率35.34%。PE仅6.19，为历史最低区间。当前股息率8.18%已极具吸引力，建仓价接近现价。</td>
+  <td style="font-size:13px;">股息率8.4%对应价 ≈ 36.00<br>（PE 6.0 安全边际）</td>
+  <td style="font-size:13px;">股息率9.5%对应价 ≈ 32.00<br>（PB < 0.65 极度低估）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">工商银行</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年分红0.3103元/股（中期10派1.414+末期10派1.689）。PE 6.89，PB 0.59。宇宙行稳定性强，但增速趋零。目标股息率4.7%+。</td>
+  <td style="font-size:13px;">股息率4.7%对应价 ≈ 6.60<br>（PE 6.0-6.3区间）</td>
+  <td style="font-size:13px;">股息率5.3%对应价 ≈ 5.90<br>（PB < 0.50 历史大底）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">建设银行</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年分红0.3887元/股（中报10派1.858+年报10派2.029），合计每10股派3.887元，分红总额约1016.84亿元。PE 7.73偏高（同业均值6.0），PB 0.70。建仓需等待回调。</td>
+  <td style="font-size:13px;">股息率4.2%对应价 ≈ 9.30<br>（PE 7.0 合理估值）</td>
+  <td style="font-size:13px;">股息率4.8%对应价 ≈ 8.10<br>（PE 6.1 低估区间）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">邮储银行</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年分红0.2183元/股（中报10派1.23+年报10派0.953）。PE 6.75，PB仅0.51为银行板块最低。高股息+低估值双杀后具备安全边际。</td>
+  <td style="font-size:13px;">股息率4.7%对应价 ≈ 4.60<br>（PE 6.3 价值区间）</td>
+  <td style="font-size:13px;">股息率5.5%对应价 ≈ 4.00<br>（PB < 0.42 历史极值）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">中国银行</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年分红0.2263元/股（中报10派1.094+年报10派1.169）。PE 7.70相对偏高，PB 0.58。汇金持股稳定，但增速和ROE低于同业。目标股息率4.2%+。</td>
+  <td style="font-size:13px;">股息率4.2%对应价 ≈ 5.40<br>（PE 7.0 合理中枢）</td>
+  <td style="font-size:13px;">股息率4.8%对应价 ≈ 4.70<br>（PB < 0.50 安全边际）</td>
+</tr>
+</tbody>
+</table>
+
+<!-- 保险+电信 -->
+<h3 style="margin-top:25px; color:#555;">▎保险 / 电信板块（2只）</h3>
+
+<table>
+<thead>
+<tr><th style="width:12%;">标的</th><th>估值逻辑</th><th style="width:18%;">建仓价推导</th><th style="width:18%;">加仓位推导</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td style="font-weight:600;">中国平安</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年每股分红2.70元（中期10派9.5+末期10派17.5），分红率36.4%。PE 7.32，PB仅0.68。寿险改革成效初显，内含价值持续增长。股息率5.03%已进入高性价比区间。</td>
+  <td style="font-size:13px;">股息率5.4%对应价 ≈ 50.00<br>（PE 6.8，PB 0.63）</td>
+  <td style="font-size:13px;">股息率6.0%对应价 ≈ 45.00<br>（PE 6.1，PB 0.57）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">中国移动</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年每股分红4.7037元（中报10派25.025+年报10派22.012），派息率75%为历史新高。PE 15.31，以修正后口径计算股息率达4.86%，远非此前仅算末期分红时的2.28%。距建仓价94.00仅-2.8%，作为兼具成长+高分红+数字基建标签的央企龙头，当前价位已进入建仓区间。</td>
+  <td style="font-size:13px;">目标股息率5.0% → 94.00<br>（PE 14.6 合理估值）</td>
+  <td style="font-size:13px;">目标股息率5.5% → 86.00<br>（PE 13.3 低估区间）</td>
+</tr>
+</tbody>
+</table>
+
+<!-- 消费板块 -->
+<h3 style="margin-top:25px; color:#555;">▎消费板块（3只）</h3>
+
+<table>
+<thead>
+<tr><th style="width:12%;">标的</th><th>估值逻辑</th><th style="width:18%;">建仓价推导</th><th style="width:18%;">加仓位推导</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td style="font-weight:600;">伊利股份</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年10派13.80元（三季报4.80+年报9.00），每股1.38元。PE 13.71，PB 2.61。2025年净利增36.8%至115.65亿，业绩强势修复。当前股息率5.27%已具吸引力，但消费板块短期承压，建议逢低建仓。</td>
+  <td style="font-size:13px;">股息率6.0%对应价 ≈ 23.00<br>（PE 12.0 估值底部）</td>
+  <td style="font-size:13px;">股息率6.6%对应价 ≈ 21.00<br>（PE 10.9 极端低估）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">海尔智家</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年10派11.557元（中期2.69+年报8.867），每股1.1557元。PE仅10.21，远低于家电行业中位。高分红+低估值+全球化品牌，三因子共振。当前股息率5.67%极具性价比。</td>
+  <td style="font-size:13px;">股息率6.1%对应价 ≈ 19.00<br>（PE 9.5 价值区间）</td>
+  <td style="font-size:13px;">股息率6.8%对应价 ≈ 17.00<br>（PE 8.5 深度低估）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">中国中免</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年每股分红0.702元（中期约10派2.5+末期10派4.5），分红率40.5%。PE高达29.45，股息率仅1.24%。免税行业仍在复苏通道，估值偏高不适合红利策略建仓。需等待PE回归20倍以下。</td>
+  <td style="font-size:13px;">股息率1.5%对应价 ≈ 47.00<br>（PE 24 合理上沿）</td>
+  <td style="font-size:13px;">股息率1.7%对应价 ≈ 41.00<br>（PE 21 价值区间）</td>
+</tr>
+</tbody>
+</table>
+
+<!-- 电力+工业+传媒 -->
+<h3 style="margin-top:25px; color:#555;">▎电力 / 化工 / 传媒板块（3只）</h3>
+
+<table>
+<thead>
+<tr><th style="width:12%;">标的</th><th>估值逻辑</th><th style="width:18%;">建仓价推导</th><th style="width:18%;">加仓位推导</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td style="font-weight:600;">长江电力</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年每股分红1.0000元（中报10派2.1+年报10派7.9），2025年净利345亿(+6.2%)，来水偏丰预期支撑业绩。PE 18.01，修正后股息率3.77%（此前仅算末期分红为2.97%）。作为"类债券"标的，目前性价比有所提升但仍需等待PE回归16倍以下。</td>
+  <td style="font-size:13px;">股息率4.2%对应价 ≈ 24.00<br>（PE 16.0 合理估值）</td>
+  <td style="font-size:13px;">股息率4.8%对应价 ≈ 21.00<br>（PE 14.0 历史低估）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">易普力</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：2025年报10派2.56元，每股0.256元。PE 17.54，股息率2.46%。民爆行业龙头，受益于基建和大矿山开发，但分红率偏低，作为红利标的吸引力不足。</td>
+  <td style="font-size:13px;">股息率2.7%对应价 ≈ 9.50<br>（PE 16.0 合理区间）</td>
+  <td style="font-size:13px;">股息率3.0%对应价 ≈ 8.50<br>（PE 14.4 安全边际）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">分众传媒</td>
+  <td style="text-align:left; font-size:13px;">同花顺口径：全年三次分红总额约49.1亿元，每股约0.34元。PE 22.10偏高（扣非PE 28.45），但股息率6.17%亮眼。分众现金流充沛、分红慷慨，作为高股息+轻资产标的，当前价位已具性价比。</td>
+  <td style="font-size:13px;">股息率6.5%对应价 ≈ 5.20<br>（PE 20.8 合理区间）</td>
+  <td style="font-size:13px;">股息率7.4%对应价 ≈ 4.60<br>（PE 18.4 低估区间）</td>
+</tr>
+</tbody>
+</table>
+
+<!-- ETF板块 -->
+<h3 style="margin-top:25px; color:#555;">▎ETF板块（2只）</h3>
+
+<table>
+<thead>
+<tr><th style="width:12%;">标的</th><th>估值逻辑</th><th style="width:18%;">建仓价推导</th><th style="width:18%;">加仓位推导</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td style="font-weight:600;">央企红利ETF<br><span style="font-size:11px;color:#888;">561580</span></td>
+  <td style="text-align:left; font-size:13px;">跟踪中证中央企业红利指数(000825)。净值1.2202。近12个月累计分红0.125元/份（月频分红，5/13、4/15各0.01元/份等）。TTM股息率约10.25%，在所有红利ETF中名列前茅。底层资产为央企高股息组合，防御性强。</td>
+  <td style="font-size:13px;">净值1.150 → 股息率10.9%<br>（指数PE回落至6.5倍）</td>
+  <td style="font-size:13px;">净值1.050 → 股息率11.9%<br>（对应指数大幅回调）</td>
+</tr>
+<tr>
+  <td style="font-weight:600;">港股通红利ETF<br><span style="font-size:11px;color:#888;">513530</span></td>
+  <td style="text-align:left; font-size:13px;">跟踪港股通高股息指数。净值1.6395，收盘1.633。累计分红0.14元/份，近12个月约0.12元/份。TTM股息率约7.35%。港股底层标的（银行、能源、电信）股息率普遍高于A股，但需承担汇率波动和港股通红利税（20%）成本。</td>
+  <td style="font-size:13px;">净值1.500 → 股息率8.0%<br>（港股回调10%区间）</td>
+  <td style="font-size:13px;">净值1.380 → 股息率8.7%<br>（港股深度回调）</td>
+</tr>
+</tbody>
+</table>
+
+<h2>三、股息率排名（由高到低）</h2>
+
+<table>
+<thead>
+<tr><th>排名</th><th>标的</th><th>代码</th><th>类型</th><th>股息率(TTM)</th><th>评价</th></tr>
+</thead>
+<tbody>
+<tr style="background:#fffde7;"><td>🥇 1</td><td style="font-weight:600;">央企红利ETF</td><td>561580</td><td>ETF</td><td class="yield-high" style="font-size:16px;">10.25%</td><td style="text-align:left;font-size:13px;">月频分红ETF，底层央企高股息，年度分红稳定</td></tr>
+<tr style="background:#fffde7;"><td>🥈 2</td><td style="font-weight:600;">招商银行</td><td>600036</td><td>银行</td><td class="yield-high">8.18%</td><td style="text-align:left;font-size:13px;">零售之王，分红率35%+持续提升，PE历史最低区间</td></tr>
+<tr><td>🥉 3</td><td style="font-weight:600;">港股通红利ETF</td><td>513530</td><td>ETF</td><td class="yield-high">7.35%</td><td style="text-align:left;font-size:13px;">港股高股息一篮子，需扣20%红利税后净息率约5.9%</td></tr>
+<tr><td>4</td><td style="font-weight:600;">分众传媒</td><td>002027</td><td>传媒</td><td class="yield-high">6.17%</td><td style="text-align:left;font-size:13px;">轻资产高分红，三次分红+特别分红，现金流充沛</td></tr>
+<tr><td>5</td><td style="font-weight:600;">海尔智家</td><td>600690</td><td>消费</td><td class="yield-high">5.67%</td><td style="text-align:left;font-size:13px;">家电龙头+全球化品牌，PE仅10倍，高分红+低估值</td></tr>
+<tr><td>6</td><td style="font-weight:600;">伊利股份</td><td>600887</td><td>消费</td><td class="yield-high">5.27%</td><td style="text-align:left;font-size:13px;">乳业绝对龙头，业绩修复+高分红，估值历史低位</td></tr>
+<tr><td>7</td><td style="font-weight:600;">中国平安</td><td>601318</td><td>保险</td><td class="yield-high">5.03%</td><td style="text-align:left;font-size:13px;">综合金融龙头，分红连续14年增长，PB仅0.68</td></tr>
+<tr style="background:#e8f5e9;"><td>8</td><td style="font-weight:600;">中国移动</td><td>600941</td><td>电信</td><td class="yield-mid">4.86%</td><td style="text-align:left;font-size:13px;">⚠修正后股息率4.86%（此前遗漏中报），派息率75%创新高</td></tr>
+<tr><td>9</td><td style="font-weight:600;">邮储银行</td><td>601658</td><td>银行</td><td class="yield-mid">4.42%</td><td style="text-align:left;font-size:13px;">PB仅0.51为银行最低，县域网点壁垒深厚</td></tr>
+<tr><td>10</td><td style="font-weight:600;">工商银行</td><td>601398</td><td>银行</td><td class="yield-mid">4.32%</td><td style="text-align:left;font-size:13px;">宇宙行连续19年A股分红王，防御底仓首选</td></tr>
+<tr><td>11</td><td style="font-weight:600;">中国银行</td><td>601988</td><td>银行</td><td class="yield-mid">3.86%</td><td style="text-align:left;font-size:13px;">国际化程度最高大行，汇金稳定持股，分红持续</td></tr>
+<tr><td>12</td><td style="font-weight:600;">建设银行</td><td>601939</td><td>银行</td><td class="yield-mid">3.85%</td><td style="text-align:left;font-size:13px;">基建/房贷优势，ROE稳定，分红连续三年超千亿</td></tr>
+<tr><td>13</td><td style="font-weight:600;">长江电力</td><td>600900</td><td>电力</td><td class="yield-mid">3.77%</td><td style="text-align:left;font-size:13px;">⚠修正后股息率3.77%（补充中报），"类债券"属性</td></tr>
+<tr><td>14</td><td style="font-weight:600;">易普力</td><td>002096</td><td>化工</td><td class="yield-low">2.46%</td><td style="text-align:left;font-size:13px;">民爆龙头，受益基建但分红率低，红利属性弱</td></tr>
+<tr><td>15</td><td style="font-weight:600;">中国中免</td><td>601888</td><td>消费</td><td class="yield-low">1.24%</td><td style="text-align:left;font-size:13px;">免税龙头但高PE+低股息率，不适合红利策略</td></tr>
+</tbody>
+</table>
+
+<h2>四、投资优先级建议</h2>
+
+<div class="section-note">
+  基于三好原则（好行业、好公司、好价格）综合评估，结合当前价位距建仓价的空间，给出以下优先级排序。⚠ 中国移动经同花顺口径修正后股息率从2.28%跳升至4.86%，评级从"暂不建议"上调。
+</div>
+
+<table>
+<thead>
+<tr><th>优先级</th><th>标的</th><th>操作建议</th><th>核心理由</th></tr>
+</thead>
+<tbody>
+<tr style="background:#e8f5e9;">
+  <td style="font-weight:700;color:#27ae60;">🔴 立即建仓</td>
+  <td style="font-weight:600;">央企红利ETF 561580</td>
+  <td style="text-align:left;font-size:13px;">距建仓价仅-5.7%，股息率10.25%领跑全组合。月频分红+央企底层+低波动，红利底仓首选。</td>
+  <td style="text-align:left;font-size:13px;">最高股息率+最低回撤风险</td>
+</tr>
+<tr style="background:#e8f5e9;">
+  <td style="font-weight:700;color:#27ae60;">🔴 立即建仓</td>
+  <td style="font-weight:600;">招商银行 600036</td>
+  <td style="text-align:left;font-size:13px;">距建仓价仅-2.8%，当前37.02元已接近36元建仓线。PE 6.19为5年最低，股息率8.18%历史高位。可现价分批建仓。</td>
+  <td style="text-align:left;font-size:13px;">PE历史最低+分红持续提升</td>
+</tr>
+<tr style="background:#e8f5e9;">
+  <td style="font-weight:700;color:#27ae60;">🔴 立即建仓</td>
+  <td style="font-weight:600;">中国移动 600941</td>
+  <td style="text-align:left;font-size:13px;"><strong>⚠ 口径修正后上调：</strong>距建仓价仅-2.8%，同花顺口径股息率4.86%（含中期分红）。派息率75%创新高，数字基建龙头兼具成长+高分红，现价已进入建仓区间。</td>
+  <td style="text-align:left;font-size:13px;">口径修正+派息率新高+建仓空间小</td>
+</tr>
+<tr style="background:#fff8e1;">
+  <td style="font-weight:700;color:#f39c12;">🟡 分批建仓</td>
+  <td style="font-weight:600;">分众传媒 002027</td>
+  <td style="text-align:left;font-size:13px;">距建仓价-5.6%，股息率6.17%。轻资产+高现金流+三次分红，现价可小仓试探，回调至5.20加仓。</td>
+  <td style="text-align:left;font-size:13px;">高分红+轻资产模式</td>
+</tr>
+<tr style="background:#fff8e1;">
+  <td style="font-weight:700;color:#f39c12;">🟡 分批建仓</td>
+  <td style="font-weight:600;">海尔智家 600690</td>
+  <td style="text-align:left;font-size:13px;">距建仓价-6.8%，股息率5.67%。PE仅10.21为家电最低梯队，全球化品牌+高分红，回调至19元可建仓。</td>
+  <td style="text-align:left;font-size:13px;">PE极低+全球品牌壁垒</td>
+</tr>
+<tr style="background:#fff8e1;">
+  <td style="font-weight:700;color:#f39c12;">🟡 等待回调</td>
+  <td style="font-weight:600;">邮储银行 601658</td>
+  <td style="text-align:left;font-size:13px;">距建仓价-6.9%。PB 0.51全银行最低，县域壁垒深厚。等待回调至4.60建仓，4.00可加仓。</td>
+  <td style="text-align:left;font-size:13px;">最低PB+县域独占壁垒</td>
+</tr>
+<tr style="background:#fff8e1;">
+  <td style="font-weight:700;color:#f39c12;">🟡 等待回调</td>
+  <td style="font-weight:600;">中国平安 601318</td>
+  <td style="text-align:left;font-size:13px;">距建仓价-6.9%，股息率5.03%。寿险改革+综合金融，PB 0.68极低。50元以下可建仓。</td>
+  <td style="text-align:left;font-size:13px;">极低PB+分红14连增</td>
+</tr>
+<tr style="background:#fce4ec;">
+  <td style="font-weight:700;color:#e74c3c;">⚪ 暂不建议</td>
+  <td style="font-weight:600;">中国中免 601888</td>
+  <td style="text-align:left;font-size:13px;">距建仓价-17.0%，PE 29.45+股息率1.24%。作为红利策略标的严重不合格，PE需回落至20倍以下才考虑。</td>
+  <td style="text-align:left;font-size:13px;">高PE+低股息不适合红利</td>
+</tr>
+<tr>
+  <td style="font-weight:700;">🟢 观察仓</td>
+  <td style="font-weight:600;">其余标的</td>
+  <td style="text-align:left;font-size:13px;">工商银行、建设银行、中国银行、伊利股份、长江电力、易普力、港股通红利ETF：当前价格均高于建议建仓价6-18%，建议设置价格提醒，等待回调到位再行动。</td>
+  <td style="text-align:left;font-size:13px;">需耐心等待更好价格</td>
+</tr>
+</tbody>
+</table>
+
+<h2>五、数据校验记录</h2>
+
+<div class="info-box">
+  <strong>数据标准：</strong>同花顺(10jqka.com.cn) 为统一口径 &nbsp;|&nbsp; 辅以中财网(cfi.cn)、东方财富(eastmoney.com)、雪球(xueqiu.com)交叉验证<br>
+  <strong>数据日期：</strong>2026年5月22日（周五）收盘数据<br>
+  <strong>股息率计算口径：</strong>TTM口径 = 近12个月累计每股分红（含2025年中报/年报全部分红方案）÷ 2026-05-22收盘价<br>
+  <strong>ETF分红口径：</strong>近12个月累计单位分红（月频/季频）÷ 单位净值<br>
+  <strong>本期关键修正（口径对齐）：</strong><br>
+  &nbsp;&nbsp;• <strong>中国移动（600941）：</strong>2.2012→4.7037元（漏计中报10派25.025元），股息率由2.28%修正为4.86%<br>
+  &nbsp;&nbsp;• <strong>建设银行（601939）：</strong>0.4067→0.3887元（以同花顺口径中报+年报合计3.887元/10股为准）<br>
+  &nbsp;&nbsp;• <strong>中国银行（601988）：</strong>0.2477→0.2263元（以同花顺口径中报+年报合计2.263元/10股为准）<br>
+  &nbsp;&nbsp;• <strong>邮储银行（601658）：</strong>0.2644→0.2183元（以同花顺口径中报+年报合计2.183元/10股为准）<br>
+  &nbsp;&nbsp;• <strong>长江电力（600900）：</strong>0.7900→1.0000元（漏计中报10派2.1元），股息率由2.97%修正为3.77%<br>
+  <strong>港股通红利ETF提示：</strong>513530底层为港股标的，需扣减20%港股通红利税，税后实际到手股息率约为标称的80%。
+</div>
+
+<h2>六、风险提示</h2>
+
+<div style="background:#fff; border:1px solid #333; padding:20px; margin:20px 0; font-size:13px; line-height:2;">
+  <p>⚠️ <strong>本报告仅为投资分析框架参考，不构成任何投资建议。</strong></p>
+  <p>1. 所有股价数据基于2026年5月22日收盘价，实际交易价格可能波动。</p>
+  <p>2. 股息率基于同花顺记录的已公布2025年度分红方案计算（含中期+末期），实际派息时间和金额以公司公告为准。</p>
+  <p>3. 建仓价和加仓位为基于估值模型的测算值，不代表市场一定会达到该价位。</p>
+  <p>4. 银行股面临净息差持续收窄、资产质量下行等系统性风险。</p>
+  <p>5. 港股通红利ETF受汇率波动和红利税政策变化影响。</p>
+  <p>6. 红利策略在利率上行周期可能跑输成长策略。</p>
+  <p>7. <strong>投资有风险，入市需谨慎。知道和做到之间隔着一条太平洋。</strong></p>
+</div>
+
+<div class="footer">
+  红利组合综合估值报告 &nbsp;|&nbsp; 分析方法论：邱国鹭《投资中最简单的事》三好原则 &nbsp;|&nbsp; 2026-05-23<br>
+  数据口径：同花顺(10jqka.com.cn) 统一标准 &nbsp;|&nbsp; 辅以中财网/东方财富/雪球交叉验证<br>
+  关键修正：中国移动股息率2.28%→4.86%、长江电力2.97%→3.77%、三大行分红重校
+</div>
+
 </body>
 </html>
